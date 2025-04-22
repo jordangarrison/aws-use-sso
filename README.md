@@ -66,6 +66,40 @@ nix develop
 
 The development shell will automatically source your AWS credentials file if you have one.
 
+#### Using with Devbox
+
+You can add this tool to your [Devbox](https://www.jetify.com/devbox/) project:
+
+```sh
+# Add the flake from GitHub
+devbox add github:jordangarrison/aws-use-sso
+
+# Or add from a local clone
+devbox add path:/path/to/aws-use-sso
+```
+
+Your `devbox.json` will be updated with a reference to the flake:
+
+```json
+{
+  "packages": [
+    "github:jordangarrison/aws-use-sso"
+  ]
+}
+```
+
+Then start a Devbox shell to use the tool:
+
+```sh
+devbox shell
+```
+
+To cache the flake for faster startup times:
+
+```sh
+devbox cache upload github:jordangarrison/aws-use-sso
+```
+
 #### Add to Your NixOS Configuration
 
 You can add this tool to your NixOS configuration flake for a system-wide installation:
