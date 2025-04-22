@@ -1,0 +1,28 @@
+# Nix build results
+result
+result-*
+
+# direnv
+.direnv/
+.envrc.local
+
+# Editor specific files
+.vscode/
+.idea/
+*.swp
+*~
+
+# Operating system files
+.DS_Store
+Thumbs.db
+
+# Common backup/temporary files
+*.bak
+*.tmp
+*.log
+
+# Nix related
+.nix-profile
+
+# AWS related
+.aws/sso-creds.sh
