@@ -10,6 +10,82 @@ This tool automates the process of:
 2. Exporting the credentials to a file
 3. Setting up environment variables for AWS CLI access
 
+## Quick Start with Devbox
+
+This quick start guide shows how to use AWS SSO Profile with [Devbox](https://www.jetify.com/docs/devbox/) to create an isolated development environment with AWS credentials properly set up.
+
+### 1. Set up Devbox
+
+If you don't have Devbox installed yet, follow the [official installation guide](https://www.jetify.com/docs/devbox/quickstart/).
+
+### 2. Add AWS SSO Profile to your Devbox project
+
+#### For a project-specific installation
+
+```sh
+# Initialize devbox if you haven't already
+devbox init
+
+# Add the AWS SSO Profile tool
+devbox add github:jordangarrison/aws-use-sso
+
+# Or specify a version
+devbox add github:jordangarrison/aws-use-sso/v1.0.0
+```
+
+#### For a global installation
+
+```sh
+# Create a global devbox configuration
+mkdir -p ~/.config/devbox/global
+cd ~/.config/devbox/global
+devbox init
+devbox add github:jordangarrison/aws-use-sso
+```
+
+### 3. Use AWS SSO Profile in your Devbox shell
+
+```sh
+# Start the devbox shell
+devbox shell
+
+# Log in with your AWS SSO profile
+aws-use-sso-profile your-sso-profile-name
+
+# Source the generated credentials file
+source ~/.aws/sso-creds.sh
+```
+
+### 4. Launch tools with AWS credentials
+
+Once you've sourced the credentials file, any application launched from that shell will inherit the AWS environment variables.
+
+This is particularly useful for:
+
+- Code editors: `code .` (VS Code) or `cursor .` (Cursor) etc...
+- IDE: `idea .` (IntelliJ IDEA)
+- AI coding agents/assistants, which will inherit your AWS credentials
+- AWS CLI commands: `aws s3 ls`
+- Terraform/CDK deployments
+
+Example workflow:
+
+```sh
+# Start devbox shell
+devbox shell
+
+# Authenticate with AWS SSO
+aws-use-sso-profile your-sso-profile-name
+
+# Source the credentials
+source ~/.aws/sso-creds.sh
+
+# Launch Cursor with AWS credentials in the environment
+cursor .
+
+# Now Cursor (and any extensions/terminals and ai agents inside it) will have access to your AWS credentials
+```
+
 ## Installation
 
 ### Using Nix Flakes (recommended)
