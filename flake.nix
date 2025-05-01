@@ -10,24 +10,29 @@
     flake-utils.lib.eachDefaultSystem (system:
       let
         pkgs = import nixpkgs { inherit system; };
-      in
-      {
-        packages.default = pkgs.stdenv.mkDerivation {
+
+        awsUseSso = pkgs.stdenv.mkDerivation {
           pname = "aws-use-sso-profile";
           version = "1.0.0";
           src = ./.;
 
           installPhase = ''
             mkdir -p $out/bin
-            cp aws-use-sso-profile.sh $out/bin/aws-use-sso-profile
-            chmod +x $out/bin/aws-use-sso-profile
+            cp aws-use-sso-profile.sh $out/bin/aws-use-sso
+            chmod +x $out/bin/aws-use-sso
           '';
 
           buildInputs = [ pkgs.bash pkgs.awscli2 ];
         };
+      in
+      {
+        packages = {
+          default = awsUseSso;
+          aws-use-sso = awsUseSso;
+        };
 
         apps.default = flake-utils.lib.mkApp {
-          drv = self.packages.${system}.default;
+          drv = awsUseSso;
         };
 
         devShells.default = pkgs.mkShell {
