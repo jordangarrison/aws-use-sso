@@ -6,14 +6,14 @@
     flake-utils.url = "github:numtide/flake-utils";
   };
 
-  outputs = { self, nixpkgs, flake-utils, ... }:
+  outputs = { nixpkgs, flake-utils, ... }:
     flake-utils.lib.eachDefaultSystem (system:
       let
         pkgs = import nixpkgs { inherit system; };
 
         awsUseSso = pkgs.stdenv.mkDerivation {
           pname = "aws-use-sso-profile";
-          version = "1.0.0";
+          version = "1.0.1";
           src = ./.;
 
           installPhase = ''
