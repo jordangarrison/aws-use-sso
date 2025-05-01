@@ -13,14 +13,14 @@
       in
       {
         packages.default = pkgs.stdenv.mkDerivation {
-          pname = "aws-use-sso";
-          version = "1.0.1";
+          pname = "aws-use-sso-profile";
+          version = "1.0.0";
           src = ./.;
 
           installPhase = ''
             mkdir -p $out/bin
-            cp aws-use-sso-profile.sh $out/bin/aws-use-sso
-            chmod +x $out/bin/aws-use-sso
+            cp aws-use-sso-profile.sh $out/bin/aws-use-sso-profile
+            chmod +x $out/bin/aws-use-sso-profile
           '';
 
           buildInputs = [ pkgs.bash pkgs.awscli2 ];
