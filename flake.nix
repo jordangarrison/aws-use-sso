@@ -12,8 +12,8 @@
         pkgs = import nixpkgs { inherit system; };
 
         awsUseSso = pkgs.stdenv.mkDerivation {
-          pname = "aws-use-sso-profile";
-          version = "1.0.1";
+          pname = "aws-use-sso";
+          version = "1.0.2";
           src = ./.;
 
           installPhase = ''
