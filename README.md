@@ -49,10 +49,10 @@ devbox add github:jordangarrison/aws-use-sso
 # Start the devbox shell
 devbox shell
 
-# Log in with your AWS SSO profile
-aws-use-sso-profile your-sso-profile-name
+# Log in and export credentials
+aws-use-sso your-sso-profile-name
 
-# Source the generated credentials file
+# Source the credentials into your current shell
 source ~/.aws/sso-creds.sh
 ```
 
@@ -74,10 +74,10 @@ Example workflow:
 # Start devbox shell
 devbox shell
 
-# Authenticate with AWS SSO
-aws-use-sso-profile your-sso-profile-name
+# Authenticate and export credentials
+aws-use-sso your-sso-profile-name
 
-# Source the credentials
+# Source the credentials into your shell
 source ~/.aws/sso-creds.sh
 
 # Launch Cursor with AWS credentials in the environment
@@ -232,7 +232,8 @@ For home-manager users, you can add it to your home configuration:
 ## Usage
 
 ```sh
-aws-use-sso-profile <profile-name>
+aws-use-sso <profile-name>
+source ~/.aws/sso-creds.sh
 ```
 
 Where `<profile-name>` is the name of a valid AWS SSO profile configured in your `~/.aws/config` file.
@@ -241,9 +242,9 @@ Where `<profile-name>` is the name of a valid AWS SSO profile configured in your
 
 1. The script logs you into AWS SSO using the specified profile
 2. It exports the credentials to `~/.aws/sso-creds.sh`
-3. It sources this file, setting the required AWS environment variables
+3. You source the credentials file to set AWS environment variables in your shell
 
-After running the script, your shell will have the necessary AWS environment variables set to interact with AWS services.
+After running the script and sourcing the credentials file, your shell will have the necessary AWS environment variables set to interact with AWS services.
 
 ## Requirements
 

@@ -13,16 +13,18 @@
 
         awsUseSso = pkgs.stdenv.mkDerivation {
           pname = "aws-use-sso";
-          version = "1.0.2";
+          version = "1.0.3";
           src = ./.;
+
+          nativeBuildInputs = [ pkgs.makeWrapper ];
 
           installPhase = ''
             mkdir -p $out/bin
             cp aws-use-sso-profile.sh $out/bin/aws-use-sso
             chmod +x $out/bin/aws-use-sso
+            wrapProgram $out/bin/aws-use-sso \
+              --prefix PATH : ${pkgs.lib.makeBinPath [ pkgs.awscli2 pkgs.bash ]}
           '';
-
-          buildInputs = [ pkgs.bash pkgs.awscli2 ];
         };
       in
       {
