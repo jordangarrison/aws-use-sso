@@ -24,5 +24,8 @@ Thumbs.db
 # Nix related
 .nix-profile
 
+# AI agent artifacts
+docs/plans/
+
 # AWS related
 .aws/sso-creds.sh
