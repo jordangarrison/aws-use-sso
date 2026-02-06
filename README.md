@@ -246,6 +246,23 @@ Where `<profile-name>` is the name of a valid AWS SSO profile configured in your
 
 After running the script and sourcing the credentials file, your shell will have the necessary AWS environment variables set to interact with AWS services.
 
+## Agent Skill
+
+This project includes an [agent skill](https://skills.sh) that enables AI coding agents (Claude Code, etc.) to manage AWS SSO credentials during development sessions.
+
+### Install the Skill
+
+```sh
+npx skills add jordangarrison/aws-use-sso
+```
+
+### What It Does
+
+- **Environment detection** — detects Nix, Devbox, NixOS, and existing AWS SSO profiles
+- **Guided installation** — walks you through installing `aws-use-sso` based on your environment
+- **Proactive login** — when you ask the agent to log in to AWS, it handles SSO authentication and offers to source credentials or let you do it yourself
+- **Auto-fix expired credentials** — when AWS commands fail mid-task due to expired tokens, the agent silently re-authenticates and retries
+
 ## Requirements
 
 - AWS CLI v2
