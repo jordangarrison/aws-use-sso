@@ -240,9 +240,11 @@ Where `<profile-name>` is the name of a valid AWS SSO profile configured in your
 
 ## How it Works
 
-1. The script logs you into AWS SSO using the specified profile
-2. It exports the credentials to `~/.aws/sso-creds.sh`
-3. You source the credentials file to set AWS environment variables in your shell
+The script checks credentials in order before opening a browser:
+
+1. **Valid credentials exist** — if `~/.aws/sso-creds.sh` has more than 5 minutes of validity remaining, the script exits immediately with no `aws` calls
+2. **Silent refresh** — if the SSO token cache is still good, `aws configure export-credentials` refreshes credentials without a browser prompt
+3. **Browser login** — only if both checks fail does the script open a browser via `aws sso login`
 
 After running the script and sourcing the credentials file, your shell will have the necessary AWS environment variables set to interact with AWS services.
 
