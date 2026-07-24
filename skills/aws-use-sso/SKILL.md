@@ -9,7 +9,7 @@ description: >
 compatibility: Requires nix or devbox. Designed for Claude Code (or similar products).
 metadata:
   author: jordangarrison
-  version: "1.1.0"
+  version: "1.2.0"
 allowed-tools: Bash(nix:*) Bash(devbox:*) Bash(aws:*) Bash(source:*) Read
 ---
 
