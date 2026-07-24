@@ -9,7 +9,7 @@ description: >
 compatibility: Requires nix or devbox. Designed for Claude Code (or similar products).
 metadata:
   author: jordangarrison
-  version: "1.1.0"
+  version: "1.2.0"
 allowed-tools: Bash(nix:*) Bash(devbox:*) Bash(aws:*) Bash(source:*) Read
 ---
 
@@ -104,9 +104,12 @@ Run the detection script. Check `SSO_PROFILES` and `SSO_PROFILE_COUNT`:
 aws-use-sso <profile-name>
 ```
 
-This will:
-1. Open a browser for SSO authentication (user must complete this)
-2. Export credentials to `~/.aws/sso-creds.sh`
+This checks credentials in order, cheapest first:
+1. If `~/.aws/sso-creds.sh` is still valid for this profile (>5 min remaining), it exits immediately — no browser, no `aws` calls
+2. If the cached SSO token is still good, it refreshes credentials silently — no browser
+3. Only if both fail does it open a browser for SSO authentication (user must complete this)
+
+Credentials land in `~/.aws/sso-creds.sh` in every case. Because of the fast paths, it is safe to run `aws-use-sso` liberally — repeated calls will not spam the user with browser windows.
 
 ### Step 3: Offer Sourcing Choice
 

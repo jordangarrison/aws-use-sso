@@ -13,7 +13,7 @@
 
         awsUseSso = pkgs.stdenv.mkDerivation {
           pname = "aws-use-sso";
-          version = "1.1.0";
+          version = "1.2.0";
           src = ./.;
 
           nativeBuildInputs = [ pkgs.makeWrapper ];
